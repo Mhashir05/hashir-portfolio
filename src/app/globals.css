@@ -37,8 +37,17 @@
 }
 
 /* Base styles  */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
 body {
-  background: var(--background);
+  background:
+    radial-gradient(900px circle at 15% 0%, rgba(124, 92, 255, 0.08), transparent 55%),
+    radial-gradient(800px circle at 85% 25%, rgba(34, 211, 238, 0.06), transparent 55%),
+    var(--background);
+  background-attachment: fixed;
   color: var(--text-primary);
   font-family: var(--font-body), system-ui, sans-serif;
 }
@@ -46,4 +55,27 @@ body {
 /* Text selection highlight (blueprint) */
 ::selection {
   background: rgba(124, 92, 255, 0.35);
+}
+@theme inline {
+  --animate-blink: blink 1.8s ease-in-out infinite;
+  --animate-spin-slow: spinslow 18s linear infinite;
+  --animate-floaty: floaty 6s ease-in-out infinite;
+  --animate-pulse-glow: pulseglow 7s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.25; }
+}
+@keyframes spinslow {
+  from { transform: rotate(0); }
+  to { transform: rotate(360deg); }
+}
+@keyframes floaty {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-16px); }
+}
+@keyframes pulseglow {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 0.9; }
 }
