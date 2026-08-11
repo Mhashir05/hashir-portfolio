@@ -61,6 +61,7 @@ body {
   --animate-spin-slow: spinslow 18s linear infinite;
   --animate-floaty: floaty 6s ease-in-out infinite;
   --animate-pulse-glow: pulseglow 7s ease-in-out infinite;
+  --animate-marquee: marquee 30s linear infinite;
 }
 
 @keyframes blink {
@@ -78,4 +79,9 @@ body {
 @keyframes pulseglow {
   0%, 100% { opacity: 0.55; }
   50% { opacity: 0.9; }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }
