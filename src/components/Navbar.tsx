@@ -16,31 +16,45 @@ export default function Navbar() {
   const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
-    const t = setTimeout(() => setExpanded(true), 900);
+    const t = setTimeout(() => setExpanded(true), 700);
     return () => clearTimeout(t);
   }, []);
 
   return (
     <nav className="fixed inset-x-0 top-4 z-50 flex justify-center px-4">
       <motion.div
-        initial={{ width: "auto", opacity: 0 }}
-        animate={{ width: expanded ? "100%" : "auto", opacity: 1 }}
-        transition={{
-          opacity: { duration: 0.6, ease: "easeOut" },
-          width: { duration: 1.3, ease: [0.22, 1, 0.36, 1] },
+        initial={{ y: -70, width: 20, height: 20, opacity: 0 }}
+        animate={{
+          y: 0,
+          width: expanded ? "100%" : 20,
+          height: expanded ? "auto" : 20,
+          opacity: 1,
         }}
-        className="flex max-w-[1100px] items-center justify-between overflow-hidden rounded-2xl border border-white/[0.08] bg-background/60 px-6 py-3.5 shadow-[0_8px_30px_-12px_rgba(0,0,0,0.6)] backdrop-blur-xl"
-      >
-        
-         <a href="#home"
+        transition={{
+          opacity: { duration: 0.4, ease: "easeOut" },
+          y: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+          width: { duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.6 },
+          height: { duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.6 },
+        }}
+        // transition={{
+        //   opacity: { duration: 0.2, ease: "easeOut" },
+        //   width: { duration: 0.4, ease: [0.22, 1, 0.20, 1], delay: 0.1 },
+        // }}
+        className="flex max-w-[1100px] items-center justify-between overflow-hidden rounded-2xl border border-white/[0.12] bg-white/[0.06] px-6 py-3.5 shadow-[0_8px_30px_-12px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-xl">
+        <motion.a
+          href="#home"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: expanded ? 1 : 0 }}
+          transition={{ duration: 0.4, delay: 0.9 }}
           className="whitespace-nowrap font-heading text-lg font-bold"
         >
           <span className="text-accent-violet">Muhammad Hashir</span>
-        </a>
+        </motion.a>
 
         <motion.div
+          initial={{ opacity: 0 }}
           animate={{ opacity: expanded ? 1 : 0 }}
-          transition={{ duration: 0.6, delay: 1.5 }}
+          transition={{ duration: 0.4, delay: 1.05 }}
           className="hidden items-center gap-8 md:flex"
         >
           {navLinks.map((link) => (
@@ -56,8 +70,9 @@ export default function Navbar() {
 
         <motion.a
           href="#contact"
+          initial={{ opacity: 0 }}
           animate={{ opacity: expanded ? 1 : 0 }}
-          transition={{ duration: 0.6, delay: 1.7 }}
+         transition={{ duration: 0.4, delay: 1.15 }}
           className="hidden rounded-full bg-gradient-to-br from-accent-violet to-accent-cyan px-5 py-2 text-sm font-semibold text-background md:inline-block"
         >
           Contact
