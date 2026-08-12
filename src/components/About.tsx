@@ -1,6 +1,7 @@
 import { Cloud, Layers, ShieldCheck, Sparkles } from "lucide-react";
 import Reveal from "./Reveal";
 
+
 const highlights = [
   { icon: Layers, title: "Full-Stack", sub: "Next.js / TypeScript / Node", color: "text-accent-violet", chip: "bg-accent-violet/[0.12]" },
   { icon: Cloud, title: "Cloud & DevOps", sub: "AWS, Docker, CI/CD", color: "text-accent-cyan", chip: "bg-accent-cyan/[0.12]" },
@@ -12,8 +13,7 @@ export default function About() {
   return (
     <section
       id="about"
-      className="mx-auto my-8 max-w-[1200px] rounded-[30px] border border-white/10 bg-gradient-to-b from-white/[0.05] to-white/[0.015] px-6 py-14 shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_30px_80px_-40px_rgba(0,0,0,0.75)] backdrop-blur-2xl sm:px-11 md:py-20"
-    >
+      className="relative overflow-hidden mx-auto my-8 max-w-[1200px] rounded-[30px] border border-white/10 bg-gradient-to-b from-white/[0.05] to-white/[0.015] px-6 py-14 shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_30px_80px_-40px_rgba(0,0,0,0.75)] backdrop-blur-2xl sm:px-11 md:py-20">
       <Reveal>
         <div className="mb-3.5 font-mono text-[13px] tracking-[0.14em] text-accent-violet">
           01 — ABOUT
