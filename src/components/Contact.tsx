@@ -5,15 +5,31 @@ import { Mail } from "lucide-react";
 import Reveal from "./Reveal";
 
 export default function Contact() {
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
+ const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+ const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form data:", form);
+    setStatus("loading");
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+
+      if (!res.ok) throw new Error("Failed");
+
+      setStatus("success");
+      setForm({ name: "", email: "", message: "" });
+    } catch {
+      setStatus("error");
+    }
   };
 
   return (
@@ -107,10 +123,22 @@ export default function Contact() {
 
               <button
                 type="submit"
-                className="mt-2 rounded-[11px] bg-gradient-to-br from-accent-violet to-accent-cyan px-6 py-3.5 font-semibold text-background transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_16px_40px_-16px_rgba(124,92,255,0.6)]"
+                disabled={status === "loading"}
+                className="mt-2 rounded-[11px] bg-gradient-to-br from-accent-violet to-accent-cyan px-6 py-3.5 font-semibold text-background transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_16px_40px_-16px_rgba(124,92,255,0.6)] disabled:cursor-not-allowed disabled:opacity-60"
               >
-                Send Message
+                {status === "loading" ? "Sending..." : "Send Message"}
               </button>
+
+              {status === "success" && (
+                <p className="text-sm font-medium text-accent-cyan">
+                  Message sent! I&apos;ll get back to you soon. ✓
+                </p>
+              )}
+              {status === "error" && (
+                <p className="text-sm font-medium text-red-400">
+                  Something went wrong. Please try again or email me directly.
+                </p>
+              )}
             </form>
           </Reveal>
         </div>
